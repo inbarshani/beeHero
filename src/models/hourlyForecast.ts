@@ -12,12 +12,12 @@ export class HourlyForecast {
     @Column()
     timestamp: number;
 
-    @Column()
+    @Column('float')
     temp: number;
 
-    @Column()
+    @Column('float')
     feelsLike: number;
 
-    @Column()
+    @Column('float')
     humidity: number;
 }

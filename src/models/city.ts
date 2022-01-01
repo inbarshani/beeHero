@@ -9,10 +9,10 @@ export class City {
     @Column()
     name: string;
 
-    @Column()
+    @Column('float')
     lat: number;
 
-    @Column()
+    @Column('float')
     lon: number;
 
     @OneToMany(() => HourlyForecast, forecast => forecast.city)
