@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { City } from './city';
 
-@Entity()
+@Entity({ name: 'forecast' })
 export class HourlyForecast {
     @PrimaryGeneratedColumn()
     id: number;

@@ -4,7 +4,7 @@ import { readdirSync, readFileSync } from 'fs';
 import path from 'path';
 import { City } from 'src/models/city';
 import { HourlyForecast } from 'src/models/hourlyForecast';
-import { FindManyOptions, Repository } from 'typeorm';
+import { FindConditions, FindManyOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class WeatherService {
@@ -57,8 +57,11 @@ export class WeatherService {
         }
     }
 
-    findAll(options: FindManyOptions): Promise<City[]> {
-        return this.citiesRepository.find(options);
+    findAll(where?: any): Promise<City[]> {
+        return this.citiesRepository.find({
+            relations: ['forecasts'],
+            where
+        });
     }
 
     async create(city: City): Promise<City> {

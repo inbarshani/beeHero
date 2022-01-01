@@ -15,6 +15,6 @@ export class City {
     @Column('float')
     lon: number;
 
-    @OneToMany(() => HourlyForecast, forecast => forecast.city)
+    @OneToMany(() => HourlyForecast, forecast => forecast.city, { cascade: true })
     forecasts: HourlyForecast[];
 }
