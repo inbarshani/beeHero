@@ -5,7 +5,7 @@
 REST API for a 5 day weather forecast of 5 cities: Jerusalem, Haifa, Tel Aviv,
 Eilat, Tiberias. Data is downloaded from https://openweathermap.org/api, and stored in a PostgreSQL DB locally.
 
-- **Note**: the free API only allows for hourly forecasts up to 3 days \*
+_**Note**: the free API only allows for hourly forecasts up to 3 days_
 
 ## API
 
