@@ -1,5 +1,4 @@
 import { Controller, Get } from '@nestjs/common';
-import { SortParam } from 'src/decorator/sortParam';
 import { WeatherService } from 'src/services/weather/weather.service';
 
 @Controller('avarages')
@@ -8,7 +7,7 @@ export class AvaragesController {
 
     @Get()
     async getCityAvarages() {
-        const cities = await this.weatherService.findAll();
+        const cities = await this.weatherService.findAllCities();
         const avarages = cities.map(_city => {
             const cityData = {
                 city: _city.name,

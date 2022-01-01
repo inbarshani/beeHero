@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { readdirSync, readFileSync } from 'fs';
-import path from 'path';
 import { City } from 'src/models/city';
 import { HourlyForecast } from 'src/models/hourlyForecast';
-import { FindConditions, FindManyOptions, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class WeatherService {
     constructor(
         @InjectRepository(City)
-        private citiesRepository: Repository<City>
+        private citiesRepository: Repository<City>,
+        @InjectRepository(HourlyForecast)
+        private forecastsRepository: Repository<HourlyForecast>
     ) {
         this.initData();
     }
@@ -56,26 +57,30 @@ export class WeatherService {
                     });
                     console.log(`Create city:
                     ${city.name}`);
-                    await this.create(city);
+                    await this.createCity(city);
                 });
             }
             console.log(`Done data load`);
         }
     }
 
-    findAll(order?: any): Promise<City[]> {
-        console.log(`find with:
-         ${JSON.stringify({
-             relations: ['forecasts'],
-             order
-         })}`);
+    findAllCities(order?: any): Promise<City[]> {
         return this.citiesRepository.find({
             relations: ['forecasts'],
             order
         });
     }
 
-    async create(city: City): Promise<City> {
+    findAllForecasts(select?: any[], order?: any, take?: number): Promise<HourlyForecast[]> {
+        return this.forecastsRepository.find({
+            relations: ['city'],
+            select,
+            order,
+            take
+        });
+    }
+
+    async createCity(city: City): Promise<City> {
         return await this.citiesRepository.save(city);
     }
 }

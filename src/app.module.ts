@@ -20,7 +20,8 @@ import { WeatherService } from './services/weather/weather.service';
             logging: true,
             synchronize: true
         }),
-        TypeOrmModule.forFeature([City])
+        TypeOrmModule.forFeature([City]),
+        TypeOrmModule.forFeature([HourlyForecast])
     ],
     controllers: [CitiesController, HumidityPointsController, AvaragesController],
     providers: [WeatherService]

@@ -9,9 +9,9 @@ export class CitiesController {
     @Get()
     async getAllCities(@SortParam() sortParam: { by: string; order?: 'ASC' | 'DESC' }) {
         if (sortParam && sortParam.by) {
-            return this.weatherService.findAll({ [sortParam.by]: sortParam.order ? sortParam.order : 'ASC' });
+            return this.weatherService.findAllCities({ [sortParam.by]: sortParam.order ? sortParam.order : 'ASC' });
         } else {
-            return this.weatherService.findAll();
+            return this.weatherService.findAllCities();
         }
     }
 }
