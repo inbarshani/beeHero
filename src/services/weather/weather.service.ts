@@ -40,16 +40,22 @@ export class WeatherService {
                     city.name = cityName;
                     city.lat = json.lat;
                     city.lon = json.lon;
+                    city.latestHourlyForecast = 0;
                     city.forecasts = json.hourly.map(hourly => {
                         const forecast = new HourlyForecast();
                         forecast.feelsLike = parseFloat(hourly['feels_like']);
                         forecast.humidity = parseFloat(hourly['humidity']);
                         forecast.temp = parseFloat(hourly['temp']);
                         forecast.timestamp = parseInt(hourly['dt']);
+                        // update city if latest forecast
+                        if (city.latestHourlyForecast < forecast.timestamp) {
+                            city.latestHourlyForecast = forecast.timestamp;
+                            city.feelsLike = forecast.feelsLike;
+                        }
                         return forecast;
                     });
                     console.log(`Create city:
-                    ${JSON.stringify(city)}`);
+                    ${city.name}`);
                     await this.create(city);
                 });
             }
