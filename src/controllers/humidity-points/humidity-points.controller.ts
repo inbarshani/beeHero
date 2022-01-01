@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('humidity-points')
+@Controller('humidityPoints')
 export class HumidityPointsController {}
