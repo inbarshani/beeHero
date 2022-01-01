@@ -17,6 +17,7 @@ import { WeatherService } from './services/weather/weather.service';
             password: 'pa55w0rd',
             database: 'BeeHeroTask',
             entities: [City, HourlyForecast],
+            logging: true,
             synchronize: true
         }),
         TypeOrmModule.forFeature([City])

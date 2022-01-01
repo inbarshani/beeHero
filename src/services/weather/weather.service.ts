@@ -57,10 +57,15 @@ export class WeatherService {
         }
     }
 
-    findAll(where?: any): Promise<City[]> {
+    findAll(order?: any): Promise<City[]> {
+        console.log(`find with:
+         ${JSON.stringify({
+             relations: ['forecasts'],
+             order
+         })}`);
         return this.citiesRepository.find({
             relations: ['forecasts'],
-            where
+            order
         });
     }
 
